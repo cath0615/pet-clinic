@@ -1,11 +1,11 @@
 package petclinic.services.map;
 
 import petclinic.model.Owner;
-import petclinic.services.CrudService;
+import petclinic.services.OwnerService;
 
 import java.util.Set;
 
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements CrudService<Owner, Long> {
+public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
     @Override
     public Set<Owner> findAll() {
         //because we are extending another class, we need to use super
@@ -30,5 +30,11 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
     @Override
     public void deleteById(Long id) {
         super.deleteById(id);
+    }
+
+    //this is a map method where need to implement
+    @Override
+    public Owner findByLastName(String lastName) {
+        return null;
     }
 }
