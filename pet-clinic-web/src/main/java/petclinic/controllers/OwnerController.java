@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import petclinic.services.OwnerService;
 
 //assign everything to owners first: prefixing at class level
-@RequestMapping("/owner")
+@RequestMapping("/owners")
 @Controller
 public class OwnerController {
     private final OwnerService ownerService;
@@ -21,6 +21,12 @@ public class OwnerController {
     @RequestMapping({"", "/", "/index", "/index.html"})
     public String ListOwners(Model model) {
         model.addAttribute("owners", ownerService.findAll());
-        return "owner/index";
+        return "owners/index";
     }
+
+    @RequestMapping("/find")
+    public String findOwners() {
+        return "notimplemented";
+    }
+
 }
