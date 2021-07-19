@@ -1,5 +1,6 @@
 package petclinic.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Owner extends Person {
@@ -8,7 +9,9 @@ public class Owner extends Person {
     private String city;
     private String telephone;
 
-    private Set<Pet> pets;
+    //we initialize this with a default value and set it to a new Hashset
+    //so when we go in and add in a new pet, it will automatically add it for us
+    private Set<Pet> pets = new HashSet<>();
 
     public String getAddress() {
         return address;
