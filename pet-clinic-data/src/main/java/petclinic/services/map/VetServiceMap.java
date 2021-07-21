@@ -1,7 +1,6 @@
 package petclinic.services.map;
 
 import org.springframework.stereotype.Service;
-import petclinic.model.Owner;
 import petclinic.model.Speciality;
 import petclinic.model.Vet;
 import petclinic.services.SpecialityService;
@@ -29,8 +28,8 @@ public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetS
 
     @Override
     public Vet save(Vet object) {
-        if(object.getSpecialities().size() > 0) {
-            object.getSpecialities().forEach(speciality -> {
+        if(object.getSpecialties().size() > 0) {
+            object.getSpecialties().forEach(speciality -> {
                 if (speciality.getId() == null) {
                     Speciality savedSpeciality = specialityService.save(speciality);
                     speciality.setId(savedSpeciality.getId());
