@@ -1,11 +1,25 @@
 package petclinic.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "pets")
 public class Pet extends BaseEntity {
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    //map the foreign key column of a managed association.
+    //a singular petType mapped by the join column of type ID
     private PetType petType;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
     private Owner owner;
+
+    @Column(name = "birth_date")
     private LocalDate birthDate;
+
+    @Column(name = "name")
     private String name;
 
     public String getName() {
