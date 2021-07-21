@@ -3,10 +3,7 @@ package petclinic.bootstrap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import petclinic.model.*;
-import petclinic.services.OwnerService;
-import petclinic.services.PetTypeService;
-import petclinic.services.SpecialityService;
-import petclinic.services.VetService;
+import petclinic.services.*;
 
 import java.time.LocalDate;
 
@@ -19,6 +16,7 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
     //We are specifying the interfaces(owner and vetService) and any implementation
     //of the interface that's in the spring context is going to get autowired
@@ -29,11 +27,13 @@ public class DataLoader implements CommandLineRunner {
     //this one constructor requires spring and the spring IoC container to wire up the
     //components for us because we have added annotations to them
     public DataLoader(OwnerService ownerService, VetService vetService,
-                      PetTypeService petTypeService, SpecialityService specialityService) {
+                      PetTypeService petTypeService, SpecialityService specialityService,
+                      VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -98,6 +98,13 @@ public class DataLoader implements CommandLineRunner {
         owner2.getPets().add(fionasCat);
 
         ownerService.save(owner2);
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(fionasCat);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sneezy Kitty");
+
+        visitService.save(catVisit);
 
         System.out.println("Loaded Owners....");
 
