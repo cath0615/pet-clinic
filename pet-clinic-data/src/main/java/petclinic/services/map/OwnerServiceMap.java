@@ -1,5 +1,6 @@
 package petclinic.services.map;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import petclinic.model.Owner;
 import petclinic.model.Pet;
@@ -10,6 +11,10 @@ import petclinic.services.PetTypeService;
 import java.util.Set;
 
 @Service
+@Profile({"default" , "map"})
+//if Don't specify an active profile, the active profile will be default
+//we only want this class to be implemented if the default profile is active or if map profile is active
+//if we specify any active profile, then default is not active so we are implementing both here
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
     private final PetTypeService petTypeService;
     private final PetService petService;
