@@ -55,6 +55,11 @@
             <version>${webjars-jquery.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery-ui</artifactId>
             <version>${webjars-jquery-ui.version}</version>
@@ -126,13 +131,13 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.junit.platform</groupId>
-                        <artifactId>junit-platform-surefire-provider</artifactId>
-                        <version>${junit-platform.version}</version>
-                    </dependency>
-                </dependencies>
+<!--                <dependencies>-->
+<!--                    <dependency>-->
+<!--                        <groupId>org.junit.platform</groupId>-->
+<!--                        <artifactId>junit-platform-surefire-provider</artifactId>-->
+<!--                        <version>${junit-platform.version}</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
             </plugin>
         </plugins>
     </build>
