@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="petclinic.PetClinicApplicationTests" time="15.423" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="petclinic.controllers.PetControllerTest" time="0.211" tests="7" errors="1" skipped="0" failures="2">
   <properties>
     <property name="gopherProxySet" value="false"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
@@ -68,5 +68,39 @@
     <property name="socksNonProxyHosts" value="192.168.0.0/16|*.192.168.0.0/16|10.0.0.0/8|*.10.0.0.0/8|172.16.0.0/12|*.172.16.0.0/12|127.0.0.1|localhost|*.localhost|local|*.local|timestamp.apple.com|*.timestamp.apple.com"/>
     <property name="http.proxyPort" value="7890"/>
   </properties>
-  <testcase name="contextLoads" classname="petclinic.PetClinicApplicationTests" time="0.077"/>
+  <testcase name="processUpdateForm" classname="petclinic.controllers.PetControllerTest" time="0.096">
+    <failure message="Range for response status value 404 expected:&lt;REDIRECTION&gt; but was:&lt;CLIENT_ERROR&gt;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: Range for response status value 404 expected:<REDIRECTION> but was:<CLIENT_ERROR>
+	at petclinic.controllers.PetControllerTest.processUpdateForm(PetControllerTest.java:105)
+]]></failure>
+    <system-out><![CDATA[2021-07-31 22:36:08.652  INFO 93631 --- [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2021-07-31 22:36:08.653  INFO 93631 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-07-31 22:36:08.653  INFO 93631 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2021-07-31 22:36:08.658  WARN 93631 --- [           main] o.s.web.servlet.PageNotFound             : No mapping for POST /owners/1/pets/2/edit
+]]></system-out>
+  </testcase>
+  <testcase name="findOwner" classname="petclinic.controllers.PetControllerTest" time="0.006"/>
+  <testcase name="initUpdateForm" classname="petclinic.controllers.PetControllerTest" time="0.012">
+    <failure message="Status expected:&lt;200&gt; but was:&lt;404&gt;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: Status expected:<200> but was:<404>
+	at petclinic.controllers.PetControllerTest.initUpdateForm(PetControllerTest.java:93)
+]]></failure>
+    <system-out><![CDATA[2021-07-31 22:36:08.699  INFO 93631 --- [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2021-07-31 22:36:08.699  INFO 93631 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-07-31 22:36:08.699  INFO 93631 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2021-07-31 22:36:08.701  WARN 93631 --- [           main] o.s.web.servlet.PageNotFound             : No mapping for GET /owners/1/pets/2/edit
+]]></system-out>
+  </testcase>
+  <testcase name="processCreationForm" classname="petclinic.controllers.PetControllerTest" time="0.034">
+    <error message="Request processing failed; nested exception is java.lang.NullPointerException" type="org.springframework.web.util.NestedServletException">org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.NullPointerException
+	at petclinic.controllers.PetControllerTest.processCreationForm(PetControllerTest.java:79)
+Caused by: java.lang.NullPointerException
+	at petclinic.controllers.PetControllerTest.processCreationForm(PetControllerTest.java:79)
+</error>
+    <system-out><![CDATA[2021-07-31 22:36:08.710  INFO 93631 --- [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2021-07-31 22:36:08.711  INFO 93631 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-07-31 22:36:08.712  INFO 93631 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+]]></system-out>
+  </testcase>
+  <testcase name="initCreationForm" classname="petclinic.controllers.PetControllerTest" time="0.024"/>
+  <testcase name="initOwnerBinder" classname="petclinic.controllers.PetControllerTest" time="0.013"/>
+  <testcase name="populatePetTypes" classname="petclinic.controllers.PetControllerTest" time="0.015"/>
 </testsuite>

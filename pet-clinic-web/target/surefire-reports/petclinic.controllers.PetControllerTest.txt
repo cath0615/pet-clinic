@@ -1,0 +1,18 @@
+-------------------------------------------------------------------------------
+Test set: petclinic.controllers.PetControllerTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 2, Errors: 1, Skipped: 0, Time elapsed: 0.211 s <<< FAILURE! - in petclinic.controllers.PetControllerTest
+processUpdateForm  Time elapsed: 0.096 s  <<< FAILURE!
+java.lang.AssertionError: Range for response status value 404 expected:<REDIRECTION> but was:<CLIENT_ERROR>
+	at petclinic.controllers.PetControllerTest.processUpdateForm(PetControllerTest.java:105)
+
+initUpdateForm  Time elapsed: 0.012 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at petclinic.controllers.PetControllerTest.initUpdateForm(PetControllerTest.java:93)
+
+processCreationForm  Time elapsed: 0.034 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.NullPointerException
+	at petclinic.controllers.PetControllerTest.processCreationForm(PetControllerTest.java:79)
+Caused by: java.lang.NullPointerException
+	at petclinic.controllers.PetControllerTest.processCreationForm(PetControllerTest.java:79)
+
