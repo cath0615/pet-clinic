@@ -3,6 +3,7 @@ package petclinic.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import javax.validation.Valid;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,7 +32,7 @@ public class OwnerController {
     //allow us to have the webDataBinder injected into our controller
     public void setAllowedFields(WebDataBinder dataBinder) {
         //webDataBinder: a DataBinder that binds request parameter to JavaBean objects, help us to
-        //control a from post with more details
+        //control a form post with more details
         dataBinder.setDisallowedFields("id");
         //Register fields that should not be allowed for binding
         //we don't want allow the web forms to address and manipulate the ID property. without it,
@@ -72,6 +73,46 @@ public class OwnerController {
         ModelAndView mav = new ModelAndView("owners/ownerDetails");
         mav.addObject(ownerService.findById(ownerId));
         return mav;
+    }
+
+    @RequestMapping("/new")
+    public String initCreationForm(Model model) {
+        model.addAttribute("owner", Owner.builder().build());
+        return "owners/createOrUpdateOwnerForm";
+    }
+
+    @PostMapping("/new")
+    //BindingResult is an interface which dictates how the object that stores the result of validation should
+    //store and retrieve the result of the validation(errors, attempt to bind to disallowed fields etc)
+    public String processCreationForm(@Valid Owner owner, BindingResult result) {
+        //The @Valid annotation will tell spring to go and validate the data passed into the controller, we are running
+        //validation on the owner and bindingResult here
+        if (result.hasErrors()) {
+            return "owners/createOrUpdateOwnerForm";
+        } else {
+            Owner savedOwner = ownerService.save(owner);
+            return "redirect:/owners/" + savedOwner.getId();
+        }
+    }
+
+    @RequestMapping("/{ownerId}/edit")
+    public String initUpdateOwnerForm(@PathVariable Long ownerId, Model model) {
+        model.addAttribute("owner", ownerService.findById(ownerId));
+        return "owners/createOrUpdateOwnerForm";
+    }
+
+    @PostMapping("/{ownerId}/edit")
+    public String processUpdateOwnerForm(@Valid Owner owner, BindingResult result, @PathVariable Long ownerId) {
+        if (result.hasErrors()) {
+            return "owners/createOrUpdateOwnerForm";
+        } else {
+            owner.setId(ownerId);
+            //since we get our ownerId bind by using @InitBinder where we prevent the model from
+            //getting the id. Form variable will automatically get bound to the owner, but not the id.
+            //So we need to explicitly set the id.
+            Owner savedOwner = ownerService.save(owner);
+            return "redirect:/owners/" + savedOwner.getId();
+        }
     }
 
 }

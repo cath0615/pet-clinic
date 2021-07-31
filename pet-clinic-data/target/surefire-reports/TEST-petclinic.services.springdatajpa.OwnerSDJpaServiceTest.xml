@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="petclinic.services.map.OwnerServiceMapTest" time="0.001" tests="8" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="petclinic.services.springdatajpa.OwnerSDJpaServiceTest" time="0.736" tests="7" errors="0" skipped="0" failures="0">
   <properties>
     <property name="gopherProxySet" value="false"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
@@ -68,12 +68,11 @@
     <property name="socksNonProxyHosts" value="192.168.0.0/16|*.192.168.0.0/16|10.0.0.0/8|*.10.0.0.0/8|172.16.0.0/12|*.172.16.0.0/12|127.0.0.1|localhost|*.localhost|local|*.local|timestamp.apple.com|*.timestamp.apple.com"/>
     <property name="http.proxyPort" value="7890"/>
   </properties>
-  <testcase name="saveNoId" classname="petclinic.services.map.OwnerServiceMapTest" time="0"/>
-  <testcase name="findByLastNameNotFound" classname="petclinic.services.map.OwnerServiceMapTest" time="0"/>
-  <testcase name="saveExistingId" classname="petclinic.services.map.OwnerServiceMapTest" time="0"/>
-  <testcase name="delete" classname="petclinic.services.map.OwnerServiceMapTest" time="0"/>
-  <testcase name="findAll" classname="petclinic.services.map.OwnerServiceMapTest" time="0"/>
-  <testcase name="findById" classname="petclinic.services.map.OwnerServiceMapTest" time="0"/>
-  <testcase name="findByLastName" classname="petclinic.services.map.OwnerServiceMapTest" time="0"/>
-  <testcase name="deleteById" classname="petclinic.services.map.OwnerServiceMapTest" time="0"/>
+  <testcase name="delete" classname="petclinic.services.springdatajpa.OwnerSDJpaServiceTest" time="0.65"/>
+  <testcase name="findAll" classname="petclinic.services.springdatajpa.OwnerSDJpaServiceTest" time="0.001"/>
+  <testcase name="findById" classname="petclinic.services.springdatajpa.OwnerSDJpaServiceTest" time="0.003"/>
+  <testcase name="save" classname="petclinic.services.springdatajpa.OwnerSDJpaServiceTest" time="0.003"/>
+  <testcase name="findByLastName" classname="petclinic.services.springdatajpa.OwnerSDJpaServiceTest" time="0.005"/>
+  <testcase name="findByIdNotFound" classname="petclinic.services.springdatajpa.OwnerSDJpaServiceTest" time="0.005"/>
+  <testcase name="deleteById" classname="petclinic.services.springdatajpa.OwnerSDJpaServiceTest" time="0.003"/>
 </testsuite>
