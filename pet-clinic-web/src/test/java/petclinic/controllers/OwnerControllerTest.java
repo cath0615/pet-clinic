@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import petclinic.model.Owner;
 import petclinic.services.OwnerService;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,38 +50,6 @@ class OwnerControllerTest {
     }
 
     @Test
-    void listOwners() throws Exception {
-        //sets up mock interaction
-        when(ownerService.findAll()).thenReturn(owners);
-        mockMVC.perform(get("/owners/index"))
-                //isOk is an HTTP status of 200
-                .andExpect((status()).isOk())
-                .andExpect(view().name("owners/index"))
-                .andExpect(model().attribute("owners", hasSize(2)));
-    }
-
-    @Test
-    void listOwnersByIndex() throws Exception {
-        //sets up mock interaction
-        when(ownerService.findAll()).thenReturn(owners);
-        mockMVC.perform(get("/owners/index"))
-                .andExpect((status()).isOk())
-                .andExpect(view().name("owners/index"))
-                .andExpect(model().attribute("owners", hasSize(2)));
-        verifyZeroInteractions(ownerService);
-    }
-
-    @Test
-    void findOwners() throws Exception {
-        mockMVC.perform(get("/owners/find"))
-                .andExpect((status().isOk()))
-                .andExpect(view().name("notimplemented"));
-        //verify with the ownerservice mock because findOwners() should not be interacting
-        //with the OwnerService
-        verifyZeroInteractions(ownerService);
-    }
-
-    @Test
     public void displayOwner() throws Exception {
         when(ownerService.findById(anyLong())).thenReturn(Owner.builder().id(1l).build());
 
@@ -88,5 +57,37 @@ class OwnerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("owners/ownerDetails"))
                 .andExpect(model().attribute("owner", hasProperty("id", is(1l))));
+    }
+
+    @Test
+    void findOwners() throws Exception {
+        mockMVC.perform(get("/owners/find"))
+                .andExpect((status().isOk()))
+                .andExpect(view().name("owners/findOwners"))
+                .andExpect(model().attributeExists("owner"));
+
+        //verify with the ownerService mock because findOwners() should not be interacting
+        //with the OwnerService
+        verifyZeroInteractions(ownerService);
+    }
+
+    @Test
+    public void processFindFromReturnMany() throws Exception {
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(Arrays.asList(Owner.builder().id(1l).build(),
+                Owner.builder().id(2l).build()));
+
+        mockMVC.perform(get("/owners"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owners/ownersList"))
+                .andExpect(model().attribute("selections", hasSize(2)));
+    }
+
+    @Test
+    void processFindFormReturnOne() throws Exception {
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(Arrays.asList(Owner.builder().id(1l).build()));
+
+        mockMVC.perform(get("/owners"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/owners/1"));
     }
 }
