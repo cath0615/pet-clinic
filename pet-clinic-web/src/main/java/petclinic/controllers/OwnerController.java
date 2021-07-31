@@ -50,7 +50,9 @@ public class OwnerController {
             owner.setLastName("");
         }
 
-        List<Owner> results = ownerService.findAllByLastNameLike(owner.getLastName());
+        //by appending the %(wild card character in SQL), it's going to do a SQL search and a like clause
+        //e.g. find everything ending with ""
+        List<Owner> results = ownerService.findAllByLastNameLike("%" + owner.getLastName() + "%");
         if (results.isEmpty()) {
             //(null string field, error code...)
             result.rejectValue("lastName", "notFound", "not found");
